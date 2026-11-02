@@ -19,7 +19,7 @@ The bundle deploys one serial job with three SQL-only notebook tasks:
 
 ## Deploy and run
 
-The checked-in `dev` target defaults to the writable `workspace.metric_views_lab` schema. Supply your own CLI profile and SQL Warehouse ID at deploy time.
+The checked-in `dev` target defaults to the writable `workspace.metric_views_lab` schema. `warehouse_id` intentionally has no default: supply your own CLI profile and SQL Warehouse ID at deploy time.
 
 ```bash
 databricks bundle validate --target dev --profile DATABRICKS_PROFILE --var="warehouse_id=YOUR_SQL_WAREHOUSE_ID"

@@ -17,7 +17,6 @@ variables:
     default: metric_views_lab
   warehouse_id:
     description: Serverless or Pro SQL Warehouse used to execute SQL-only notebooks.
-    default: YOUR_SQL_WAREHOUSE_ID
 
 targets:
   dev:
@@ -28,4 +27,3 @@ targets:
     variables:
       catalog: workspace
       schema: metric_views_lab
-      warehouse_id: YOUR_SQL_WAREHOUSE_ID
