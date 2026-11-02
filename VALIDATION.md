@@ -1,10 +1,10 @@
 # Validation record
 
-Validated with Databricks CLI 1.22.1 against profile `sda` and SQL Warehouse `80ce00c04da8510d`.
+Validated with Databricks CLI 1.22.1 in a private development workspace using a serverless/Pro SQL Warehouse.
 
 - Bundle validation: `Validation OK!`
 - Bundle deployment: one job created, six bundle files uploaded.
-- Job run: `864206909865585`
+- Job run: completed successfully
 - Result: `TERMINATED / SUCCESS`
 - Tasks: `lab_01_build_sales_metric_view`, `lab_02_joins_and_fanout`, and `lab_03_windows_and_materialization` all succeeded.
 
@@ -21,4 +21,4 @@ Validated with Databricks CLI 1.22.1 against profile `sda` and SQL Warehouse `80
 | Rolling-window sample | `0, 3137, 6196, 9264, 12383` | The first dates show the seven-day customer window changing by date. |
 | Materialized monthly Metric View | `latest_refresh_status: Succeeded` | The managed materialization refreshed successfully. |
 
-The materialized view reported `metric_view.materialization.enabled=true`, `mode=relaxed`, and a refresh timestamp of `2026-11-02T06:19:20Z`. `EXPLAIN EXTENDED` also showed a Photon Parquet scan of the generated `revenue_by_month` materialization relation. These checks are intentionally direct SQL controls rather than screenshots, so they can be repeated after a source or runtime change.
+The materialized view reported `metric_view.materialization.enabled=true` and `mode=relaxed`; `EXPLAIN EXTENDED` also showed a Photon Parquet scan of the generated `revenue_by_month` materialization relation. These checks are intentionally direct SQL controls rather than screenshots, so they can be repeated after a source or runtime change.

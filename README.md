@@ -19,12 +19,12 @@ The bundle deploys one serial job with three SQL-only notebook tasks:
 
 ## Deploy and run
 
-The checked-in `sda` target defaults to the writable `workspace.metric_views_lab` schema and Warehouse `80ce00c04da8510d`.
+The checked-in `dev` target defaults to the writable `workspace.metric_views_lab` schema. Supply your own CLI profile and SQL Warehouse ID at deploy time.
 
 ```bash
-databricks bundle validate --target sda --profile sda
-databricks bundle deploy --target sda --profile sda
-databricks bundle run metric_views_labs --target sda --profile sda
+databricks bundle validate --target dev --profile DATABRICKS_PROFILE --var="warehouse_id=YOUR_SQL_WAREHOUSE_ID"
+databricks bundle deploy --target dev --profile DATABRICKS_PROFILE --var="warehouse_id=YOUR_SQL_WAREHOUSE_ID"
+databricks bundle run metric_views_labs --target dev --profile DATABRICKS_PROFILE --var="warehouse_id=YOUR_SQL_WAREHOUSE_ID"
 ```
 
 The notebooks are synced under the bundle workspace path. The job runs them in order so that each lab leaves its objects available for inspection. The run should finish with three successful tasks. Lab 1 should show matching order and distinct-order counts, a zero-row duplicate-key check, and AOV controls that agree with the Metric View. Lab 2 should show a larger naive joined header total than the direct header control, while the one-to-many Metric View keeps header and line-item measures at their own grains. Lab 3 should return a rolling customer metric and leave the materialization task queryable even if its managed refresh is still pending.
@@ -32,13 +32,13 @@ The notebooks are synced under the bundle workspace path. The job runs them in o
 To use another catalog, schema, or warehouse, override the variables and update the notebook identifiers before running:
 
 ```bash
-databricks bundle deploy --target sda --profile sda \
+databricks bundle deploy --target dev --profile DATABRICKS_PROFILE \
   --var="catalog=your_catalog" \
   --var="schema=your_schema" \
-  --var="warehouse_id=your_warehouse_id"
+  --var="warehouse_id=YOUR_SQL_WAREHOUSE_ID"
 ```
 
-The notebooks currently use the checked-in default `workspace.metric_views_lab` in their SQL identifiers so the published `sda` run is reproducible. If you override the variables, replace those identifiers in the notebook copies as part of the same change; the variables document the intended deployment contract and do not rewrite SQL identifiers inside an `.ipynb` file.
+The notebooks currently use the checked-in default `workspace.metric_views_lab` in their SQL identifiers. If you override the catalog or schema variables, replace those identifiers in the notebook copies as part of the same change; bundle variables do not rewrite SQL identifiers inside an `.ipynb` file.
 
 ## What the labs demonstrate
 
