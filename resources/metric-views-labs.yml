@@ -1,0 +1,22 @@
+resources:
+  jobs:
+    metric_views_labs:
+      name: "[${bundle.target}] The Metric is Mine — Metric Views labs"
+      max_concurrent_runs: 1
+      tasks:
+        - task_key: lab_01_build_sales_metric_view
+          notebook_task:
+            notebook_path: ../labs/metric-views/01-build-sales-metric-view.ipynb
+            warehouse_id: ${var.warehouse_id}
+        - task_key: lab_02_joins_and_fanout
+          depends_on:
+            - task_key: lab_01_build_sales_metric_view
+          notebook_task:
+            notebook_path: ../labs/metric-views/02-joins-and-fanout.ipynb
+            warehouse_id: ${var.warehouse_id}
+        - task_key: lab_03_windows_and_materialization
+          depends_on:
+            - task_key: lab_02_joins_and_fanout
+          notebook_task:
+            notebook_path: ../labs/metric-views/03-windows-and-materialization.ipynb
+            warehouse_id: ${var.warehouse_id}

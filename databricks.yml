@@ -1,0 +1,32 @@
+bundle:
+  name: the_metric_is_mine
+
+include:
+  - resources/*.yml
+
+sync:
+  include:
+    - labs/metric-views/*.ipynb
+
+variables:
+  catalog:
+    description: Unity Catalog catalog used by the labs.
+    default: workspace
+  schema:
+    description: Writable schema used by the labs.
+    default: metric_views_lab
+  warehouse_id:
+    description: Serverless or Pro SQL Warehouse used to execute SQL-only notebooks.
+    default: 80ce00c04da8510d
+
+targets:
+  sda:
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-916267ef-3b9b.cloud.databricks.com
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog: workspace
+      schema: metric_views_lab
+      warehouse_id: 80ce00c04da8510d
