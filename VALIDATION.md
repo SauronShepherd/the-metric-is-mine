@@ -17,7 +17,8 @@ Validated with Databricks CLI 1.22.1 against profile `sda` and SQL Warehouse `80
 | Direct AOV vs. Metric View AOV | `151091.892028479486 = 151091.892028479486` | The composed numerator/denominator measure agrees with the SQL control. |
 | Correct header total | `1,133,439,215,246.25` | The order-header economic concept. |
 | Naive header total after line-item join | `5,667,029,083,716.96` | Fanout inflates the repeated header value, as explained in Lab 2. |
+| One-to-many header controls by status | `F/O/P` match direct SQL exactly | Header revenue and order counts stay at header grain while line revenue remains a separate fact measure. |
 | Rolling-window sample | `0, 3137, 6196, 9264, 12383` | The first dates show the seven-day customer window changing by date. |
 | Materialized monthly Metric View | `latest_refresh_status: Succeeded` | The managed materialization refreshed successfully. |
 
-The materialized view reported `metric_view.materialization.enabled=true`, `mode=relaxed`, and a refresh timestamp of `2026-11-02T06:19:20Z`. These checks are intentionally direct SQL controls rather than screenshots, so they can be repeated after a source or runtime change.
+The materialized view reported `metric_view.materialization.enabled=true`, `mode=relaxed`, and a refresh timestamp of `2026-11-02T06:19:20Z`. `EXPLAIN EXTENDED` also showed a Photon Parquet scan of the generated `revenue_by_month` materialization relation. These checks are intentionally direct SQL controls rather than screenshots, so they can be repeated after a source or runtime change.
