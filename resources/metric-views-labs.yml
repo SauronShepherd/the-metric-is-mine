@@ -20,3 +20,9 @@ resources:
           notebook_task:
             notebook_path: ../labs/metric-views/03-windows-and-materialization.ipynb
             warehouse_id: ${var.warehouse_id}
+        - task_key: lab_04_recent_features
+          depends_on:
+            - task_key: lab_03_windows_and_materialization
+          notebook_task:
+            notebook_path: ../labs/metric-views/04-recent-features-filter-offset-relationships.ipynb
+            warehouse_id: ${var.warehouse_id}
