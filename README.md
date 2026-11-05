@@ -4,10 +4,10 @@ This repository packages the four hands-on notebooks from the **The Metric is Mi
 
 The bundle deploys one serial job with four SQL-only notebook tasks:
 
-1. Build and query a sales Metric View, including an AOV control, parameters, and definition inspection.
-2. Reproduce join fanout, model a one-to-many relationship, and reconcile the result with direct SQL controls.
+1. Build and query a sales Metric View, including an AOV reconciliation, parameters, and definition inspection.
+2. Reproduce join fanout, model a one-to-many relationship, and reconcile header and line-fact results with direct SQL controls.
 3. Query a rolling window, review semiadditive balance syntax, and optionally create a materialized monthly aggregate.
-4. Exercise a filtered measure, a twelve-month window offset, and a Beta relationship between two Metric Views.
+4. Exercise a filtered measure, a twelve-month window offset with an explicit mismatch check, and a Beta relationship between two Metric Views.
 
 ## Requirements
 
@@ -28,7 +28,7 @@ databricks bundle deploy --target dev --profile DATABRICKS_PROFILE --var="wareho
 databricks bundle run metric_views_labs --target dev --profile DATABRICKS_PROFILE --var="warehouse_id=YOUR_SQL_WAREHOUSE_ID"
 ```
 
-The notebooks are synced under the bundle workspace path. The job runs them in order so that each lab leaves its objects available for inspection. The run should finish with four successful tasks. Lab 1 should show matching order and distinct-order counts, a zero-row duplicate-key check, filtered-revenue and AOV controls that agree with the Metric View, and a parameterized discount query. Lab 2 should show a larger naive joined header total than the direct header control, while the one-to-many Metric View keeps header and line-item measures at their own grains. Lab 3 should return a rolling customer metric and leave the materialization task queryable even if its managed refresh is still pending. Lab 4 should match the filtered-measure and twelve-month offset controls and expose the declared Metric View relationship in `DESCRIBE TABLE EXTENDED`.
+The notebooks are synced under the bundle workspace path. The job runs them in order so that each lab leaves its objects available for inspection. The run should finish with four successful tasks. Lab 1 should show matching order and distinct-order counts, a zero-row duplicate-key check, filtered-revenue and AOV controls that agree with the Metric View, and a parameterized discount query. Lab 2 should show a larger naive joined header total than the direct header control, while the one-to-many Metric View keeps header and line-item measures at their own grains and the direct line-price control agrees. Lab 3 should return a rolling customer metric and leave the materialization task queryable even if its managed refresh is still pending. Lab 4 should match the filtered-measure and twelve-month offset controls, report zero offset mismatches, and expose the declared Metric View relationship in both `DESCRIBE TABLE EXTENDED` and `INFORMATION_SCHEMA.TABLE_CONSTRAINTS`.
 
 To use another catalog, schema, or warehouse, override the variables and update the notebook identifiers before running:
 
