@@ -1,10 +1,11 @@
 # Validation record
 
-Validated on 2026-11-05 with Databricks CLI 1.22.1 in a private development workspace using a serverless/Pro SQL Warehouse. The first post-refactor run caught a real parser bug in the parameterized relationship target; the target was changed to a local identifier after setting the requested catalog and schema explicitly. The corrected run (`757932730375855`) and the follow-up run after adding Lab 3's date-range preflight (`975807630188710`) both completed successfully, so the `CREATE OR REPLACE`, parameter passing, materialization, date check, and relationship steps are repeatable in this workspace.
+Validated on 2026-11-05 with Databricks CLI 1.22.1 in a private development workspace using a serverless/Pro SQL Warehouse. The first post-refactor run caught a real parser bug in the parameterized relationship target; the target was changed to a local identifier after setting the requested catalog and schema explicitly. The corrected runs (`757932730375855`, `975807630188710`) and the latest flat-layout run (`831883261582261`) all completed successfully, so the `CREATE OR REPLACE`, parameter passing, materialization, date check, relationship, and root-level notebook paths are repeatable in this workspace.
 
 - Bundle validation: `Validation OK!`
-- Bundle deployment: one job updated; the latest edit uploaded the four renamed notebook files.
-- Job run: completed successfully
+- Bundle deployment: one job updated; the latest flat-layout edit uploaded the four root-level notebook files and removed the old nested copies.
+- Repository layout: the four notebooks and `metric-views-labs.yml` are now at the repository root; bundle paths and article links point to those flat paths.
+- Job run: `831883261582261` completed successfully
 - Result: `TERMINATED / SUCCESS`
 - Tasks: `lab_01_build_sales_metric_view`, `lab_02_joins_and_fanout`, `lab_03_windows_and_materialization`, and `lab_04_recent_features` all succeeded.
 - Notebook parameters: every task received `catalog=workspace` and `schema=metric_views_lab`; the checked-in notebooks contain no workspace-specific object names.

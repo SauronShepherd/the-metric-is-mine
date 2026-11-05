@@ -6,7 +6,7 @@ resources:
       tasks:
         - task_key: lab_01_build_sales_metric_view
           notebook_task:
-            notebook_path: ../labs/metric-views/lab_01__build_a_governed_sales_metric_view.ipynb
+            notebook_path: ./lab_01__build_a_governed_sales_metric_view.ipynb
             warehouse_id: ${var.warehouse_id}
             base_parameters:
               catalog: ${var.catalog}
@@ -15,7 +15,7 @@ resources:
           depends_on:
             - task_key: lab_01_build_sales_metric_view
           notebook_task:
-            notebook_path: ../labs/metric-views/lab_02__joins_cardinality_and_fanout.ipynb
+            notebook_path: ./lab_02__joins_cardinality_and_fanout.ipynb
             warehouse_id: ${var.warehouse_id}
             base_parameters:
               catalog: ${var.catalog}
@@ -24,7 +24,7 @@ resources:
           depends_on:
             - task_key: lab_02_joins_and_fanout
           notebook_task:
-            notebook_path: ../labs/metric-views/lab_03__windows_offsets_and_materialization.ipynb
+            notebook_path: ./lab_03__windows_offsets_and_materialization.ipynb
             warehouse_id: ${var.warehouse_id}
             base_parameters:
               catalog: ${var.catalog}
@@ -33,7 +33,7 @@ resources:
           depends_on:
             - task_key: lab_03_windows_and_materialization
           notebook_task:
-            notebook_path: ../labs/metric-views/lab_04__recent_features_filter_offset_relationships.ipynb
+            notebook_path: ./lab_04__recent_features_filter_offset_relationships.ipynb
             warehouse_id: ${var.warehouse_id}
             base_parameters:
               catalog: ${var.catalog}

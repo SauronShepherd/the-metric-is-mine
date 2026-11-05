@@ -9,6 +9,8 @@ The bundle deploys one serial job with four SQL-only notebook tasks:
 3. Query a rolling window, review semiadditive balance syntax, and optionally create a materialized monthly aggregate.
 4. Exercise a filtered measure, a twelve-month window offset with an explicit mismatch check, and a Beta relationship between two Metric Views.
 
+The four notebooks and the bundle resource file live at the repository root on purpose. There is no maze of `labs/metric-views/` and `resources/` folders to navigate before the first cell has even run.
+
 ## Requirements
 
 - Databricks CLI 1.22 or newer.

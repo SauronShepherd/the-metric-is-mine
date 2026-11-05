@@ -2,11 +2,11 @@ bundle:
   name: the_metric_is_mine
 
 include:
-  - resources/*.yml
+  - metric-views-labs.yml
 
 sync:
   include:
-    - labs/metric-views/*.ipynb
+    - "*.ipynb"
 
 variables:
   catalog:
