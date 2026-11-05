@@ -1,12 +1,14 @@
 # Validation record
 
-Validated on 2026-11-05 with Databricks CLI 1.22.1 in a private development workspace using a serverless/Pro SQL Warehouse. The bundle was deployed and run twice after the latest notebook edits; the second run also completed successfully, so the `CREATE OR REPLACE` and relationship steps are repeatable in this workspace.
+Validated on 2026-11-05 with Databricks CLI 1.22.1 in a private development workspace using a serverless/Pro SQL Warehouse. The first post-refactor run caught a real parser bug in the parameterized relationship target; the target was changed to a local identifier after setting the requested catalog and schema explicitly. The corrected run (`757932730375855`) and the follow-up run after adding Lab 3's date-range preflight (`975807630188710`) both completed successfully, so the `CREATE OR REPLACE`, parameter passing, materialization, date check, and relationship steps are repeatable in this workspace.
 
 - Bundle validation: `Validation OK!`
-- Bundle deployment: one job updated; the latest edit uploaded four notebook files.
+- Bundle deployment: one job updated; the latest edit uploaded the four renamed notebook files.
 - Job run: completed successfully
 - Result: `TERMINATED / SUCCESS`
 - Tasks: `lab_01_build_sales_metric_view`, `lab_02_joins_and_fanout`, `lab_03_windows_and_materialization`, and `lab_04_recent_features` all succeeded.
+- Notebook parameters: every task received `catalog=workspace` and `schema=metric_views_lab`; the checked-in notebooks contain no workspace-specific object names.
+- Lab 3 preflight: the notebook now queries `MIN(o_orderdate)`, `MAX(o_orderdate)`, and source row count before applying its window filter.
 
 ## Expected demonstrations
 
@@ -26,4 +28,4 @@ Validated on 2026-11-05 with Databricks CLI 1.22.1 in a private development work
 | Metric View relationship metadata | `orders_to_customers / RELATIONSHIP / enforced NO` | The Beta relationship is discoverable metadata and is not an enforced uniqueness constraint. |
 | Materialized monthly Metric View | `latest_refresh_status: Succeeded` | The managed materialization refreshed successfully. |
 
-The materialized view reported `metric_view.materialization.enabled=true` and `mode=relaxed`; `EXPLAIN EXTENDED` also showed a Photon Parquet scan of the generated `revenue_by_month` materialization relation. These checks are intentionally direct SQL controls rather than screenshots, so they can be repeated after a source or runtime change.
+The materialized view reported `metric_view.materialization.enabled=true`, `mode=relaxed`, and `latest_refresh_status: Succeeded`; `EXPLAIN EXTENDED` also showed a Photon Parquet scan of the generated `revenue_by_month` materialization relation. These checks are intentionally direct SQL controls rather than screenshots, so they can be repeated after a source or runtime change.

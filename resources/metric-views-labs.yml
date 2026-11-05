@@ -6,23 +6,35 @@ resources:
       tasks:
         - task_key: lab_01_build_sales_metric_view
           notebook_task:
-            notebook_path: ../labs/metric-views/01-build-sales-metric-view.ipynb
+            notebook_path: ../labs/metric-views/lab_01__build_a_governed_sales_metric_view.ipynb
             warehouse_id: ${var.warehouse_id}
+            base_parameters:
+              catalog: ${var.catalog}
+              schema: ${var.schema}
         - task_key: lab_02_joins_and_fanout
           depends_on:
             - task_key: lab_01_build_sales_metric_view
           notebook_task:
-            notebook_path: ../labs/metric-views/02-joins-and-fanout.ipynb
+            notebook_path: ../labs/metric-views/lab_02__joins_cardinality_and_fanout.ipynb
             warehouse_id: ${var.warehouse_id}
+            base_parameters:
+              catalog: ${var.catalog}
+              schema: ${var.schema}
         - task_key: lab_03_windows_and_materialization
           depends_on:
             - task_key: lab_02_joins_and_fanout
           notebook_task:
-            notebook_path: ../labs/metric-views/03-windows-and-materialization.ipynb
+            notebook_path: ../labs/metric-views/lab_03__windows_offsets_and_materialization.ipynb
             warehouse_id: ${var.warehouse_id}
+            base_parameters:
+              catalog: ${var.catalog}
+              schema: ${var.schema}
         - task_key: lab_04_recent_features
           depends_on:
             - task_key: lab_03_windows_and_materialization
           notebook_task:
-            notebook_path: ../labs/metric-views/04-recent-features-filter-offset-relationships.ipynb
+            notebook_path: ../labs/metric-views/lab_04__recent_features_filter_offset_relationships.ipynb
             warehouse_id: ${var.warehouse_id}
+            base_parameters:
+              catalog: ${var.catalog}
+              schema: ${var.schema}
